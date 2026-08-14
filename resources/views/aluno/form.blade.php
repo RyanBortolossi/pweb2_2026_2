@@ -15,7 +15,7 @@
 
         <h4>Formulário Aluno</h4>
 
-        <form action="{{ route('aluno.store') }}" method="post"> <!--{{}} pega a variabel php e poe no html--> <!--rotas configuram na routes-->
+        <form action="{{ route('aluno.store') }}" method="post"> <!--os conchetes pega a variabel php e poe no html--> <!--rotas configuram na routes-->
             @csrf
             <!--Faz com que o laravel faça uma verificação para ver se a submiussão do formulario
                 vem de uma rede extern ou não;. se for externa ele bloqueia-->

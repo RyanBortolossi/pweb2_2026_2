@@ -22,5 +22,9 @@ class AlunoController extends Controller
     function store(Request $request) {
         dd($request->all());// o request é quando vc n sabe se o adado veio do post ou da url, dai ele pega os dois
         //aqui ele pega todos os dad9os do formulario
+
+        Aluno::create($request->all()); //pega os itnens do forms e salva o formulario
+
+        return redirect('aluno')->with("sucesso", 'Registro salvo com sucesso!');
     }
 }
