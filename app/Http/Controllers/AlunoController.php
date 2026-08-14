@@ -13,9 +13,14 @@ class AlunoController extends Controller
 
         return view('aluno.list')->with(['dados' => $dados]);
     }
-    
+
     function create()
     {
         return view('aluno.form');
+    }
+
+    function store(Request $request) {
+        dd($request->all());// o request é quando vc n sabe se o adado veio do post ou da url, dai ele pega os dois
+        //aqui ele pega todos os dad9os do formulario
     }
 }
