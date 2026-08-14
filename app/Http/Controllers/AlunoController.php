@@ -9,8 +9,13 @@ class AlunoController extends Controller
 {
     public function index()
     {
-        $dados = Aluno::all();
+        $dados = Aluno::All();
 
-        return view('aluno.list',['dados',$dados]);
+        return view('aluno.list')->with(['dados' => $dados]);
+    }
+    
+    function create()
+    {
+        return view('aluno.form');
     }
 }
