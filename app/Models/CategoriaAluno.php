@@ -9,4 +9,9 @@ class CategoriaAluno extends Model
 {
     /** @use HasFactory<\Database\Factories\CategoriaAlunoFactory> */
     use HasFactory;
+
+      protected $fillable = [
+        'nome',
+        'nivel',
+    ];
 }
