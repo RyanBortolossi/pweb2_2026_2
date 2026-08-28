@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Aluno;
+use App\Models\CategoriaAluno;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,6 +22,7 @@ class AlunoFactory extends Factory
             'nome' => fake()->name(),
             'cpf' => fake()->numerify('###.###.###-##'),
             'telefone' => fake()->phoneNumber(),
+            'categooria_id' => (CategoriaAluno::All->random())->id, //ele puxa os dados dql outra tabela que criamos (a estrangeira)
         ];
     }
 }
