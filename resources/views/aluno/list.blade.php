@@ -48,6 +48,7 @@
                         <td>{{ $item->nome }}</td>
                         <td>{{ $item->cpf }}</td>
                         <td>{{ $item->telefone }}</td>
+                        <td>{{ $item->categoria_id->nome }}</td>
                         <td>
                             <a class='btn btn-warning' title='Editar' href="{{ route('aluno.edit', $item->id) }}">Editar</a>
                         </td>
