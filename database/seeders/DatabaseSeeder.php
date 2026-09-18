@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CategoriaAlunoSeeder::class,
             AlunoSeeder::class,
+            CursoSeeder::class,
+            TurmaSeeder::class,
+            MatriculaSeeder::class,
         ]); 
 
         User::factory()->create([
