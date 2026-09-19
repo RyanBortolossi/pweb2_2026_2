@@ -16,7 +16,7 @@ class CursoController extends Controller
 
     function create()
     {
-     return view('curso.form');
+        return view('curso.form');
     }
 
 
@@ -43,14 +43,14 @@ class CursoController extends Controller
 
         $data = $request->all(); //vai puxar todos os dados salvos
         $imagem = $request->file('imagem'); //puxa a imagem, pede a imagem
-        
+
         //se existir a imagem ele passa pelo if e salva, se ão ele só pula e salva direto
-        if($imagem){
-            $nome_imagem = date('YmdiHs').".". $imagem->getClientOriginalExtension(); //salva a imagem como a data e hora quando ela foi salva para garantir que ela é unica +(.) a extensão dela
+        if ($imagem) {
+            $nome_imagem = date('YmdiHs') . "." . $imagem->getClientOriginalExtension(); //salva a imagem como a data e hora quando ela foi salva para garantir que ela é unica +(.) a extensão dela
             $diretorio = "imagem/curso/"; //escolhe onde a imagem vai ser salva
-            $imagem->storeAs($diretorio , $nome_imagem, 'public'); //função nativa do laravel paraa salvar, passa o caminho, a imagem e a classificação dela (public)
+            $imagem->storeAs($diretorio, $nome_imagem, 'public'); //função nativa do laravel paraa salvar, passa o caminho, a imagem e a classificação dela (public)
             $data['imagem'] = $diretorio . $nome_imagem;
-            }
+        }
 
         Curso::create($request->all());
 
@@ -60,11 +60,10 @@ class CursoController extends Controller
     function edit($id)
     {
         $data = Curso::find($id);
-        $categorias = CategoriaCurso::orderBy('nome')->get(); //tem q chamar la em cima o use
 
         // dd($data);
         //return view('curso.form')->with(['data' => $data]);
-        return view('curso.form')->with(compact('data', 'categorias'));//tem que retornar assim se nn ele n puxa as categorias
+        return view('curso.form')->with(compact('data'));//tem que retornar assim se nn ele n puxa as categorias
 
 
     }
@@ -75,16 +74,7 @@ class CursoController extends Controller
         //dd($request->all());
         $this->validateForm($request);
 
-                $data = $request->all(); //vai puxar todos os dados salvos
-        $imagem = $request->file('imagem'); //puxa a imagem, pede a imagem
-        
-        //se existir a imagem ele passa pelo if e salva, se ão ele só pula e salva direto
-        if($imagem){
-            $nome_imagem = date('YmdiHs').".". $imagem->getClientOriginalExtension(); //salva a imagem como a data e hora quando ela foi salva para garantir que ela é unica +(.) a extensão dela
-            $diretorio = "imagem/curso/"; //escolhe onde a imagem vai ser salva
-            $imagem->storeAs($diretorio , $nome_imagem, 'public'); //função nativa do laravel paraa salvar, passa o caminho, a imagem e a classificação dela (public)
-            $data['imagem'] = $diretorio . $nome_imagem;
-            }
+        $data = $request->all(); //vai puxar todos os dados salvos
 
         Curso::find($id)->update($data);
 
@@ -93,6 +83,11 @@ class CursoController extends Controller
 
     function destroy($id)
     {
+        $curso = Curso::findOrFail($id);
+        if(!empty($curso->matriculas() != null)) {
+            return redirect('curso')->with("error",'N foi possivel remover o curso  pois existem dados associados a ele');
+
+        }
         Curso::destroy($id);
 
         return redirect('curso')->with("success", 'Registro removido com sucesso!');

@@ -18,5 +18,8 @@ class Curso extends Model
                             'valor' => 'float',
       ];
 
+      public function matriculas(){
+        return $this->hasMany(Matricula::class);
+      }
 
 }

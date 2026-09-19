@@ -31,6 +31,25 @@ Route::post(
     [AlunoController::class, 'search']
 )->name('aluno.search');
 
+Route::resource('curso', \App\Http\Controllers\CursoController::class);
+Route::post(
+    '/curso/search',
+    [AlunoController::class, 'search']
+)->name('curso.search');
+
+
+Route::resource('turma', \App\Http\Controllers\TurmaController::class);
+Route::post(
+    '/turma/search',
+    [AlunoController::class, 'search']
+)->name('turma.search');
+
+
+Route::resource('matricula', \App\Http\Controllers\MatriculaController::class);
+Route::post(
+    '/matricula/search',
+    [AlunoController::class, 'search']
+)->name('matricula.search');
 /*
 Route::get('/aluno', function () {
     return view('aluno.list');
