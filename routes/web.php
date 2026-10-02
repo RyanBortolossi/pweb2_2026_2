@@ -31,11 +31,18 @@ Route::post(
     [AlunoController::class, 'search']
 )->name('aluno.search');
 
+///////////////////////////   CURSO
 Route::resource('curso', \App\Http\Controllers\CursoController::class);
+
+Route::get('/curso/{curso}/turmas', [\App\Http\Controllers\TurmaController::class, 'index'])->name('curso.turmas'); //o index é o metodo ali, que vai chamar o metodo dentro do turmacontroller
+
+Route::get('/curso/{curso}/turmas/create', [\App\Http\Controllers\TurmaController::class, 'create'])->name('curso.turmas.create');
+
 Route::post(
     '/curso/search',
     [AlunoController::class, 'search']
 )->name('curso.search');
+//////////////////////////
 
 
 Route::resource('turma', \App\Http\Controllers\TurmaController::class);

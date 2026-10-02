@@ -1,21 +1,18 @@
 @extends('main')
-@section('titulo', 'Listagem de Cursos')
+@section('titulo', 'Listagem de Matriculas')
 @section('conteudo')
     <div class="row">
 
-        @dd($curso,$dados);//puxa os dados de curso
-
-        <h3>Listagem de Turmas</h3>
-        <h5>Curso: {{$curso->nome}}</h5>
-        <form action="{{ route('turma.search') }}" method="post">
+        <h3>Listagem de Matriculas</h3>
+        <form action="{{ route('matricula.search') }}" method="post">
             @csrf
             <div class="row">
                 <div class="col-2">
                     <label for="nome">Tipo</label>
                     <select name="tipo" class="form-select">
-                        <option value="nome">Nome</option>
-                        <option value="requisito">Requisito</option>
-                        <option value="carga_horaria">Carga Horaria</option>
+                        <option value="nome_curso">Curso</option>
+                        <option value="nome_turma">turma</option>
+                        <option value="nome_aluno">aluno</option>
                     </select>
                 </div>
                 <div class="col-5">
@@ -24,8 +21,7 @@
                 </div>
                 <div class="col-5">
                     <button type="submit" class="btn btn-primary">Buscar</button>
-                    <a href="{{ route('curso.turma.create', $curso) }}" class="btn btn-success"> Novo</a>
-                    <a href="{{ url('turma') }}" class="btn btn-success"> Voltar</a>
+                    <a href="{{ url('matricula/create') }}" class="btn btn-success"> Novo</a>
                 </div>
             </div>
         </form>
@@ -38,10 +34,10 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Código</th>
-                    <th scope="col">Data Início</th>
-                    <th scope="col">Data Fim</th>
+                    <th scope="col">Curso</th>
+                    <th scope="col">Turma</th>
+                    <th scope="col">Aluno</th>
+                    <th scope="col">Data Matricula</th>
                     <th scope="col">Ação</th>
                     <th scope="col">Ação</th>
                 </tr>
@@ -50,15 +46,18 @@
                 @foreach ($dados as $item)
                     <tr>
                         <th scope='row'>{{ $item->id }}</th>
-                        <td>{{ $item->nome }}</td>
-                        <td>{{ $item->codigo }}</td>
-                        <td>{{ date('d/m/Y',strtotime($item->data_inicio)) }}</td>
-                        <td>{{ date('d/m/Y',strtotime($item->data_fim)) }}</td>
+                        <td>{{ $item->curso->nome }}</td>
+                        <td>{{ $item->turma->nome }}</td>
+                        <td>{{ $item->aluno->nome }}</td>
+                        <td>{{ date('d/m/Y',strtotime($item->data_matricula)) }}</td>
                         <td>
-                            <a class='btn btn-warning' title='Editar' href="{{ route('turma.edit', $item->id) }}">Editar</a>
+                            <a class='btn btn-primary' title='Turmas' href="{{ route('curso.turmas', $item->id) }}">Ver Turmas {{ $item->turmas->count() }}</a>
                         </td>
                         <td>
-                            <form action="{{ route('turma.destroy', $item->id) }}" method="post">
+                            <a class='btn btn-warning' title='Editar' href="{{ route('matricula.edit', $item->id) }}">Editar</a>
+                        </td>
+                        <td>
+                            <form action="{{ route('matricula.destroy', $item->id) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class='btn btn-danger' title='Exclur'

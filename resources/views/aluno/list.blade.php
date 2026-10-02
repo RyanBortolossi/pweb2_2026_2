@@ -50,6 +50,9 @@
                         <td>{{ $item->telefone }}</td>
                         <td>{{ $item->categoria_id->nome }}</td>
                         <td>
+                            <a class='btn btn-primary' title='Turmas' href="{{ route('curso.turmas', $item->id) }}">Ver Turmas {{ $item->turmas->count() }}</a>
+                        </td>
+                        <td>
                             <a class='btn btn-warning' title='Editar' href="{{ route('aluno.edit', $item->id) }}">Editar</a>
                         </td>
                         <td>
