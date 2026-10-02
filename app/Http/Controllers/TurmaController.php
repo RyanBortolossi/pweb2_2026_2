@@ -7,17 +7,19 @@ use Illuminate\Http\Request;
 
 class TurmaController extends Controller
 {
-    public function index()
+    public function index(Curso $curso)
     {
-        $dados = Turma::All();
+        $dados = $curso->turmas;
 
-        return view('turma.list')->with(['dados' => $dados]);
+        return view('turma.list')->with([
+            'dados' => $dados,
+            'curso' => $curso,
+            ]);
     }
 
-    function create()
+    function create(Curso $curso)//já passa filytrado pela url
     {
-        $cursos = Curso::orderBy('nome')->get();
-        return view('turma.form')->with(compact('data'));//tem que retornar assim se nn ele n puxa as categorias
+        return view('turma.form')->with(compact('curso'));
     }
 
 
@@ -54,7 +56,7 @@ class TurmaController extends Controller
 
         Turma::create($request->all());
 
-        return redirect('turma')->with("success", 'Registro Salvo com sucesso!');
+        return redirect()->route('curso.turmas')->with("success", 'Registro Salvo com sucesso!'); //o route é para que as alterações feitas dentro da aba sempre retornem para o mesmo id/curso
     }
 
     function edit($id)

@@ -9,17 +9,24 @@ class Curso extends Model
 {
 
   protected $fillable = [
-        'nome',
-        'requisito',
-        'carga_horaria',
-        'valor',
-    ];
-      protected $casts = ['carga_horaria' => 'float',
-                            'valor' => 'float',
-      ];
+    'nome',
+    'requisito',
+    'carga_horaria',
+    'valor',
+  ];
+  protected $casts = [
+    'carga_horaria' => 'float',
+    'valor' => 'float',
+  ];
 
-      public function matriculas(){
-        return $this->hasMany(Matricula::class);
-      }
+
+  public function turmas()
+  {
+    return $this->hasMany(Turma::class);
+  }
+  public function matriculas()
+  {
+    return $this->hasMany(Matricula::class);
+  }
 
 }

@@ -26,4 +26,6 @@ class Turma extends Model
         return $this->belongsTo(Curso::class, 'curso_id');
     }
 
+    
+
 }
