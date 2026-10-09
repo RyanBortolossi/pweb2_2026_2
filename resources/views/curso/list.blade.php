@@ -22,6 +22,7 @@
                 <div class="col-5">
                     <button type="submit" class="btn btn-primary">Buscar</button>
                     <a href="{{ url('curso/create') }}" class="btn btn-success"> Novo</a>
+                    <a href="{{ url('curso/report') }}" class="btn btn-danger"> Relatório</a>
                 </div>
             </div>
         </form>

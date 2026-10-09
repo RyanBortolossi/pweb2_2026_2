@@ -59,7 +59,15 @@ Route::post(
 )->name('matricula.search');
 /*
 Route::get('/aluno', function () {
-    return view('aluno.list');
+    return view('aluno
+    .list');
     //return "<h3>Olá mundo Laravel!</h3>";
 });
 */
+
+
+//O report precisa estar em cima de resources -> GERADOR DO RELATORIO PDF
+
+Route::get('/curso/report', 
+[\App\Http\Controllers\CursoController::class, 'report'])->name('curso.report');
+

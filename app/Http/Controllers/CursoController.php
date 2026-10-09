@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Curso;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\pdf;;
 
 class CursoController extends Controller
 {
@@ -106,5 +107,33 @@ class CursoController extends Controller
         }
 
         return view('curso.list', compact('dados'));
+    }
+
+    public function report()
+
+    {
+
+        $curso = Curso::orderBy('nome')->get();
+
+  
+
+        $data = [
+
+            'title' => 'Listagem de Cursos',
+
+            'date' => date('m/d/Y'),
+
+            'dados' => $curso
+
+        ]; 
+
+            
+
+        $pdf = PDF::loadView('curso.report', $data);
+
+     
+
+        return $pdf->download('listagem_cursos.pdf');
+
     }
 }
