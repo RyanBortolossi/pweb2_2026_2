@@ -73,3 +73,9 @@ Route::get('/curso/report',
 Route::get('/curso/report-matriculados', 
 [\App\Http\Controllers\CursoController::class, 'report'])->name('curso.reportMatriculados')->name('curso.reportMatriculados');
 
+
+Route::get('/curso/chart', [\App\Http\Controllers\CursoController::class, 'chart'])->name('curso.chart');
+
+Route::get('/curso/chart-qtd-aluno-curso-chart', 
+[\App\Http\Controllers\CursoController::class, 'chartQtdAlunoCurso'])->name('curso.qtdAlunoCursoChart') ;
+

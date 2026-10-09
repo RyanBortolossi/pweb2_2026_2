@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Charts\QtdAlunoCursoChart;
 use App\Models\Curso;
 use Illuminate\Http\Request;
-use Barryvdh\DomPDF\Facade\pdf;;
+use Barryvdh\DomPDF\Facade\pdf;
+use App\Charts\Cursochart;
 
 class CursoController extends Controller
 {
@@ -154,5 +156,12 @@ class CursoController extends Controller
         $pdf = PDF::loadView('curso.reportMatriculados', $data);
         return $pdf->download('relatorio_alunos_matriculados_curso.pdf');
 
+    }
+
+    public function chart(CursoChart $chart){
+        return view('curso.chart', ['chart' => $chart->build()]);
+    }
+    public function chartQtdAlunoCurso(QtdAlunoCursoChart $chart){
+        return view('curso.qtdAlunoCursoChart', ['chart' => $chart->build()]);
     }
 }
