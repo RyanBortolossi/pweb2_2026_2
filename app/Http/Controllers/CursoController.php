@@ -133,7 +133,26 @@ class CursoController extends Controller
 
      
 
-        return $pdf->download('listagem_cursos.pdf');
+        return $pdf->download('relatorio_curso.pdf');
+
+    }
+
+
+    public function reportMatriculados()
+    {
+        $curso = Curso::with('alunos.categoria')->orderBy('id')->get();
+        $data = [
+
+            'title' => 'Relatório Matriculados por Cursos',
+
+            'date' => date('m/d/Y'),
+
+            'dados' => $curso
+
+        ]; 
+
+        $pdf = PDF::loadView('curso.reportMatriculados', $data);
+        return $pdf->download('relatorio_alunos_matriculados_curso.pdf');
 
     }
 }
