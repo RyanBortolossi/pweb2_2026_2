@@ -119,7 +119,7 @@ class CursoController extends Controller
 
         $data = [
 
-            'title' => 'Listagem de Cursos',
+            'titulo' => 'Listagem de Cursos',
 
             'date' => date('m/d/Y'),
 
@@ -143,7 +143,7 @@ class CursoController extends Controller
         $curso = Curso::with('alunos.categoria')->orderBy('id')->get();
         $data = [
 
-            'title' => 'Relatório Matriculados por Cursos',
+            'titulo' => 'Relatório Matriculados por Cursos',
 
             'date' => date('m/d/Y'),
 

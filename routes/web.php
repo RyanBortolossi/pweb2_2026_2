@@ -69,5 +69,7 @@ Route::get('/aluno', function () {
 //O report precisa estar em cima de resources -> GERADOR DO RELATORIO PDF
 
 Route::get('/curso/report', 
-[\App\Http\Controllers\CursoController::class, 'report'])->name('curso.report');
+[\App\Http\Controllers\CursoController::class, 'report'])->name('curso.report')->name('curso.report');
+Route::get('/curso/report-matriculados', 
+[\App\Http\Controllers\CursoController::class, 'report'])->name('curso.reportMatriculados')->name('curso.reportMatriculados');
 
